@@ -1,0 +1,28 @@
+# Build
+docker build -t pschub .
+
+# Run
+docker run -p 8000:8000 pschub
+
+# Interactive shell
+docker run -i -t --entrypoint=/bin/bash pschub
+
+# Executable
+docker run -t pschub filename
+
+# Save image
+docker save -o pschub.tar pschub
+
+# Load image
+docker load -i pschub.tar
+
+# Delete containers
+docker rm -f $(docker ps -a -q)
+
+# Delete images
+docker rmi -f $(docker images -q)
+
+# Delete dangling images
+docker rmi $(docker images -qa -f "dangling=true")
+
+# NOTE for windows: start path with // (e.g. //bin/bash)
