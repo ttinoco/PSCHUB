@@ -47,9 +47,6 @@ ADD cull_idle_servers.py /srv/jupyterhub/cull_idle_servers.py
 # Notebooks
 COPY notebooks /notebooks
 
-# Cases
-RUN cp -r /packages/GRIDOPT/tests/resources/cases /notebooks/
-
 # User management
 RUN mkdir /scripts
 ADD ./users/add_users.sh /scripts
