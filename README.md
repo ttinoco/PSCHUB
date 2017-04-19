@@ -27,7 +27,7 @@ This volume is mounted to the directory `/data` inside the PSCHub docker contain
 
 ## Notebooks
 
-The welcome notebook is the file `notebooks/Welcome.ipynb` in this reposiory. Each user gets a clean copy of the directory `notebooks/examples` each time they start a session.
+The welcome notebook is the file `notebooks/Welcome.ipynb` in this reposiory. Each user gets a clean copy of the directory `notebooks/examples` each time they start a session. The network files for the examples are in the directory `notebooks/cases`.
 
 ## Workspace
 
