@@ -10,7 +10,7 @@ if [ $(id -u) -eq 0 ]; then
     
     while IFS=, read username password; do
 	
-	rm -rf /data/work-$username
+	rm -rf /data/workspace-$username
 
 	if egrep "^$username" /etc/passwd >/dev/null;  then
 
