@@ -6,6 +6,13 @@ A JupyterHub docker container for power systems computing.
 
 * docker engine
 
+## Available Packages
+
+Inside the PSCHub docker container, the following packages are available:
+
+* Scipy, Numpy
+* PFNET, OPTALG, GRIDOPT 
+
 ## Build and Deploy Instructions
 
 The following shell scripts are available for building and deploying PSCHub:
