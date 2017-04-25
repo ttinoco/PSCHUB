@@ -6,11 +6,12 @@ MAINTAINER Tomas Tinoco De Rubira <ttinoco5687@gmail.com>
 RUN apt-get update -y
 RUN apt-get install -y build-essential
 RUN apt-get install -y autoconf libtool 
+RUN apt-get install -y libblas-dev liblapack-dev gfortran
 RUN pip install notebook matplotlib
 
 # PFNET
 WORKDIR /packages
-RUN git clone -b master https://github.com/ttinoco/PFNET.git #
+RUN git clone -b master https://github.com/ttinoco/PFNET.git  #
 WORKDIR PFNET
 RUN ./autogen.sh
 RUN ./configure
@@ -23,14 +24,29 @@ RUN python setup.py build_ext --inplace
 RUN nosetests -s -v
 RUN python setup.py install
 
+# Ipopt and Mumps
+WORKDIR /packages
+ADD https://www.coin-or.org/download/source/Ipopt/Ipopt-3.12.7.tgz Ipopt-3.12.7.tgz
+RUN gunzip Ipopt-3.12.7.tgz
+RUN tar xvf Ipopt-3.12.7.tar
+WORKDIR Ipopt-3.12.7
+WORKDIR ThirdParty/Mumps
+RUN ./get.Mumps
+WORKDIR ../../
+RUN ./configure
+RUN make 
+RUN make test
+RUN make install
+
 # OPTALG
 WORKDIR /packages
 RUN git clone -b master https://github.com/ttinoco/OPTALG.git
 WORKDIR OPTALG
+COPY optalg_setup.cfg setup.cfg
 RUN pip install -r requirements.txt
-RUN python setup.py build_ext --inplace
+RUN python setup.py build_ext --inplace --with "mumps ipopt"
 RUN nosetests -s -v
-RUN python setup.py install
+RUN python setup.py install --with "mumps ipopt"
 
 # GRIDOPT
 WORKDIR /packages
