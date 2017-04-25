@@ -12,6 +12,7 @@ Inside the PSCHub docker container, the following packages are available:
 
 * Scipy, Numpy
 * PFNET, OPTALG, GRIDOPT 
+* Ipopt, MUMPS
 
 ## Build and Deploy Instructions
 
