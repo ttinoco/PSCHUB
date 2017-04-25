@@ -6,7 +6,7 @@ A JupyterHub docker container for power systems computing.
 
 * docker engine
 
-## Available Packages
+## Available Packages and Libraries
 
 Inside the PSCHub docker container, the following packages are available:
 
