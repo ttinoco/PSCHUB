@@ -7,7 +7,25 @@ RUN apt-get update -y
 RUN apt-get install -y build-essential
 RUN apt-get install -y autoconf libtool 
 RUN apt-get install -y libblas-dev liblapack-dev gfortran
+
+# Python
+ADD common_requirements.txt .
+RUN pip install -r common_requirements.txt
 RUN pip install notebook matplotlib
+
+# Ipopt and Mumps
+WORKDIR /packages
+ADD https://www.coin-or.org/download/source/Ipopt/Ipopt-3.12.7.tgz Ipopt-3.12.7.tgz
+RUN gunzip Ipopt-3.12.7.tgz
+RUN tar xvf Ipopt-3.12.7.tar
+WORKDIR Ipopt-3.12.7
+WORKDIR ThirdParty/Mumps
+RUN ./get.Mumps
+WORKDIR ../../
+RUN ./configure
+RUN make 
+RUN make test
+RUN make install
 
 # PFNET
 WORKDIR /packages
@@ -23,20 +41,6 @@ RUN pip install -r requirements.txt
 RUN python setup.py build_ext --inplace
 RUN nosetests -s -v
 RUN python setup.py install
-
-# Ipopt and Mumps
-WORKDIR /packages
-ADD https://www.coin-or.org/download/source/Ipopt/Ipopt-3.12.7.tgz Ipopt-3.12.7.tgz
-RUN gunzip Ipopt-3.12.7.tgz
-RUN tar xvf Ipopt-3.12.7.tar
-WORKDIR Ipopt-3.12.7
-WORKDIR ThirdParty/Mumps
-RUN ./get.Mumps
-WORKDIR ../../
-RUN ./configure
-RUN make 
-RUN make test
-RUN make install
 
 # OPTALG
 WORKDIR /packages
