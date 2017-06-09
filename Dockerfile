@@ -5,7 +5,7 @@ MAINTAINER Tomas Tinoco De Rubira <ttinoco5687@gmail.com>
 # General
 RUN apt-get update -y
 RUN apt-get install -y build-essential
-RUN apt-get install -y autoconf libtool 
+RUN apt-get install -y autoconf libtool autoconf-archive
 RUN apt-get install -y libblas-dev liblapack-dev gfortran
 
 # Python
