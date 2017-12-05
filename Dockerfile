@@ -26,4 +26,5 @@ COPY notebooks /notebooks
 RUN mkdir /scripts
 ADD ./users/add_users.sh /scripts
 ADD ./users/rm_users.sh /scripts
-
+ADD ./users/sample.csv /tmp
+RUN bash /scripts/add_users.sh /tmp/sample.csv
